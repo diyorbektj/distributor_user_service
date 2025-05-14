@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+package auth;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+service AuthService {
+  rpc CheckToken (CheckTokenRequest) returns (EmployeeResponse);
+  rpc Login (LoginRequest) returns (EmployeeLoginResponse);
+  rpc Register (RegisterRequest) returns (EmployeeRegisterResponse);
+}
+
+
+message CheckTokenRequest {
+  string token = 1;
+}
+
+message LoginRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message RegisterRequest {
+  string email = 1;
+  string password = 2;
+  string login = 3;
+  string phone = 4;
+  string address = 5;
+  string name = 6;
+  string surname = 7;
+  string patronymic = 8;
+}
+
+
+message EmployeeRegisterResponse {
+  bool success = 1;
+  string message = 2;
+  string token = 3;
+  EmployeeResponse employee = 4;
+}
+
+message EmployeeResponse {
+  int32 id = 1;
+  string login = 2;
+  string email = 3;
+  string name = 4;
+  string surname = 5;
+  string phone = 6;
+  string address = 7;
+  string patronymic = 8;
+  bool confirmed = 9;
+  google.protobuf.Timestamp date_create = 10;
+  string server = 11;
+  google.protobuf.Timestamp date_delete = 12;
+  int32 role_id = 13;
+  google.protobuf.Timestamp created_at = 14;
+  google.protobuf.Timestamp updated_at = 15;
+}
+
+message EmployeeLoginResponse {
+  bool success = 1;
+  string message = 2;
+  string token = 3;
+  EmployeeResponse employee = 4;
+}
+
+message EmployeeListResponse {
+  repeated EmployeeResponse employees = 1;
+}

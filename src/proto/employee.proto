@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package employee;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+service EmployeeService {
+  rpc GetEmployeeById (EmployeeIdRequest) returns (EmployeeResponse);
+  rpc GetAllEmployees (Empty) returns (EmployeeListResponse);
+  rpc UpdateProfile (UpdateEmployeeRequest) returns (UpdateEmployeeResponse);
+}
+
+message EmployeeIdRequest {
+  int32 id = 1;
+}
+
+message UpdateEmployeeRequest {
+  string phone = 1;
+  string email = 2;
+  string oldPassword = 3;
+  string newPassword = 4;
+  string confirmNewPassword = 5;
+}
+
+
+message EmployeeResponse {
+  int32 id = 1;
+  string login = 2;
+  string email = 3;
+  string name = 4;
+  string surname = 5;
+  string phone = 6;
+  string address = 7;
+  string patronymic = 8;
+  bool confirmed = 9;
+  google.protobuf.Timestamp date_create = 10;
+  string server = 11;
+  google.protobuf.Timestamp date_delete = 12;
+  int32 role_id = 13;
+  google.protobuf.Timestamp created_at = 14;
+  google.protobuf.Timestamp updated_at = 15;
+}
+
+message EmployeeListResponse {
+  repeated EmployeeResponse employees = 1;
+}
+
+
+message UpdateEmployeeResponse {
+  bool success = 1;
+  string message = 2;
+  EmployeeResponse employee = 3;
+}
+
+message Empty {}
