@@ -47,7 +47,7 @@ export class EmployeeEntity {
   @Column('timestamp', { nullable: true })
   date_delete: Date;
 
-  @Column('int', { default: 1 })
+  @Column('int', { nullable: true })
   id_role: number;
 
   @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
