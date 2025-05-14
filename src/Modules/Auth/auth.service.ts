@@ -131,7 +131,7 @@ export class AuthService {
       surname,
       patronymic,
       confirmed: true,
-      role_id: 1,
+      id_role: 1,
       date_create: new Date(),
     });
 

@@ -2,16 +2,10 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { EmployeeEntity } from 'src/Entities/employee.entity';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
-import * as jwt from 'jsonwebtoken';
 import * as process from 'node:process';
 
-import {
-  Injectable,
-  NotFoundException,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { UpdateEmployeeDto } from './dto/update-employee.dto';
-import { RegisterEmployeeDto } from './dto/register-employee-dto';
 
 export interface EmployeeResponse {
   id: number;
@@ -26,7 +20,7 @@ export interface EmployeeResponse {
   dateCreate?: { seconds: number; nanos: number };
   server: string;
   dateDelete?: { seconds: number; nanos: number };
-  roleId: number;
+  id_role: number;
   createdAt?: { seconds: number; nanos: number };
   updatedAt?: { seconds: number; nanos: number };
 }
