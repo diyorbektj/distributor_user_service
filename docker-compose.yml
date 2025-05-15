@@ -1,0 +1,44 @@
+version: '1.0'
+
+services:
+  nest-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: user_service
+    restart: always
+    ports:
+      - "3003:3003"
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_PORT=${DB_PORT}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_DATABASE=${DB_DATABASE}
+    networks:
+      - app-network
+
+  db:
+    image: postgres:15
+    container_name: 'user_service_database'
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
+    ports:
+      - "5435:5432"
+    volumes:
+      - ./docker/postgres:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+volumes:
+  postgres-data:
+
+
+networks:
+  app-network:
+    driver: bridge
